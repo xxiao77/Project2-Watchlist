@@ -1,8 +1,19 @@
 body {
   padding: 50px;
+  background-color: rgb(240,240,240);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(73, 143, 170);
+  font-size: medium;
+}
+
+/* .login {
+
+} */
+
+img {
+  max-width: 100%;
+  height: auto;
 }

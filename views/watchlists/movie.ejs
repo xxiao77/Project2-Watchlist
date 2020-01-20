@@ -1,3 +1,13 @@
 <%- include('../partials/header') %>
 
-<h2>MOVIE LIST</h2>
+<% movies.forEach(m => { %>
+    <form action="/movies/new" method="POST">
+       <br>
+       <div>
+        <a href="/movies/<%= m._id%>/review"><%= m.name %></a>
+        <a href="https://www.youtube.com/watch?v=<%= m.trailer %>" target="_blank">Trailer</a>
+       </div>
+       <br>
+       <img src="https://image.tmdb.org/t/p/w185<%= m.image %>"> 
+    </form>    
+<% }) %>

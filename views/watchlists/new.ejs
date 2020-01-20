@@ -1,3 +1,17 @@
 <%- include('../partials/header') %>
 
-<h2>Search Movie</h2>
+<form action="/movies/search" method="POST">
+    <input type="text" placeholder="movie name" name="newMovie"/>
+    <input type="submit" value="Search" />
+</form>
+<% movies.forEach(m => { %>
+    <form action="/movies/new" method="POST">
+        <p><%= m.title %>
+        <input type="hidden" name="externalId" value='<%= m.id %>'/>
+        <input type="hidden" name="name" value='<%= m.title %>'/>
+        <input type="hidden" name="image" value='<%= m.poster_path %>'/>
+        <input type="submit" value="ADD">
+        </p>
+        <img src="https://image.tmdb.org/t/p/w500<%= m.poster_path %>"> 
+    </form>
+<% }) %>
