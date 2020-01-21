@@ -1,17 +1,23 @@
 <%- include('../partials/header') %>
 
-<form action="/movies/search" method="POST">
-    <input type="text" placeholder="movie name" name="newMovie"/>
-    <input type="submit" value="Search" />
+<form action="/movies/search" method="POST" class="search">
+    <br><br>
+    <input type="text" placeholder="Search..." name="newMovie"/>
+    <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
 </form>
+
 <% movies.forEach(m => { %>
-    <form action="/movies/new" method="POST">
-        <p><%= m.title %>
-        <input type="hidden" name="externalId" value='<%= m.id %>'/>
-        <input type="hidden" name="name" value='<%= m.title %>'/>
-        <input type="hidden" name="image" value='<%= m.poster_path %>'/>
-        <input type="submit" value="ADD">
+    <br>
+    <form action="/movies/new" method="POST" class="searchResult">
+        <p class="searchTitle"><%= m.title %>
+            <br>
+            Release: <%= m.release_date %>
+            <input type="hidden" name="externalId" value='<%= m.id %>'/>
+            <input type="hidden" name="name" value='<%= m.title %>'/>
+            <input type="hidden" name="image" value='<%= m.poster_path %>'/>
+            <br>
+            <input type="submit" value="Add Movie" class="addMovie">
         </p>
-        <img src="https://image.tmdb.org/t/p/w500<%= m.poster_path %>"> 
+        <img src="https://image.tmdb.org/t/p/w185<%= m.poster_path %>"> 
     </form>
 <% }) %>

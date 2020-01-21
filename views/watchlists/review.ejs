@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<div>
+<div class="watchList">
     <h2><%= movie.name %></h2>
     <img src="https://image.tmdb.org/t/p/w342<%= movie.image %>">
 </div>
@@ -17,6 +17,15 @@
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
-  <input type="submit" value="Add Review">
+  <input type="submit" value="Save">
 </form>
+<br>
+<table>
+    <% movie.reviews.forEach(r => { %>
+    <div>
+        <td><%= r. content %></td>
+        <td><%= r. rating %></td>
+    </div>
+    <% }) %>
+</table>
 

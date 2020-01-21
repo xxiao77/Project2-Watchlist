@@ -1,15 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const statusSchema = new Schema ({
-    movieId: String,
-    watched: Boolean,
-    rating: {type: Number, min: 0, max: 5},
-    review: String
-}, {
-    timestamps: true
-})
-
 const userSchema = new Schema ({
     name: String,
     email: String,
@@ -18,7 +9,6 @@ const userSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'Movie'
     }, 
-    status: [statusSchema]
 }, {
     timestamps: true
 })

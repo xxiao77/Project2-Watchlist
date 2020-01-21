@@ -1,7 +1,36 @@
 body {
-  padding: 50px;
-  background-color: rgb(240,240,240);
+  /* padding: 50px; */
+  margin: auto;
+  background-color: #f5f5f5 ;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.topnav {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f4f0ef;
+}
+
+/* Navbar links */
+.topnav a {
+  margin: 10px;
+  display: block;
+  height: 100%;
+  color: #292626;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic;
+  font-size: x-large;
+}
+
+/* Links - change color on hover */
+.topnav a:hover {
+  /* background-color: rgb(221, 221, 221); */
+  color: #cc9787;
 }
 
 a {
@@ -9,11 +38,108 @@ a {
   font-size: medium;
 }
 
-/* .login {
-
-} */
-
-img {
+#indexImage {
   max-width: 100%;
   height: auto;
+  filter: drop-shadow(100%);
+}
+
+.title-block {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  
+}
+.title {
+  position: relative;
+  font-size: 3.5vmax;
+  left: -50%;
+  color: rgba(255, 255, 255, 0.836);
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  letter-spacing: 5px;
+  width: 70vmin;
+  height: 70vmin;
+  background: rgba(136, 128, 128, 0.459);
+  border-radius: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  color: #fff;
+  font-size: 2vmax;
+}
+
+.userName {
+  color: rgb(44, 41, 41);
+  margin-right: 20px;
+}
+
+.watchList {
+margin: 30px 30px;
+padding-top: 50px;
+}
+
+.search {
+  padding-top: 50px;
+  margin: 30px;
+  padding-bottom: 10px;
+}
+
+.search input[type=text] {
+  float: left;
+  padding: 7px;
+  border: none;
+  /* margin-top: 8px; */
+  /* margin-right: 16px; */
+  font-size: 17px;
+}
+
+.searchButton {
+  float: left;
+  border: none;
+  display: flex;
+  color: rgb(131, 121, 121);
+  text-align: center;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 23px;
+}
+
+.searchResult {
+  display: block;
+  margin-left: 30px;
+  margin-bottom: .76923077rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #456;
+}
+
+.searchTitle {
+  font-size: 40px;
+  font-weight: bold;
+  width: 85%;
+  float: right;
+  color: rgba(39, 37, 37, 0.781);
+  font-family: 'Caveat', cursive;
+}
+
+.addMovie {
+  display:inline-block;
+  font-family: 'Archivo Black', cursive;
+  font-size: medium;
+  font-weight: 500;
+  padding: 10px;
+  background-color: rgba(241, 237, 237, 0.678);
+  color: rgba(0, 0, 0, 0.685);
+  border: 2px solid #ca9c8e;
+  border-radius: 8px;
+}
+
+.addMovie:hover {
+  background-color: #ddb2a7a8;
+  color: white;
+  font-weight: 800;
 }

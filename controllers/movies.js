@@ -1,23 +1,12 @@
 const Movies = require('../models/movie');
-const Users = require('../models/user');
+// const Users = require('../models/user');
 
+// show watchlist movies
 const index = (req, res) => {
-    // const newStatus = new Movies(req.body);
-    // console.log(newMovie);
-    
     Movies.find({}, (err, movies) => {
         if(err) {
             console.log(err);
         }
-        // newMovie.save((err) => {
-    //     if(err) {
-    //         console.log(err);
-    //     }
-    //     res.render('watchlists/movie', {
-            // title: 'MOVIE LIST',
-            // movies
-        // });
-    // })
         res.render('watchlists/movie', {
             title: 'MOVIE LIST',
             movies
@@ -25,6 +14,7 @@ const index = (req, res) => {
     });
 }
 
+// run search movie page
 const searchMovie = (req, res) => {
     res.render('watchlists/new', {
         title: 'SEARCH MOVIE',
@@ -32,20 +22,12 @@ const searchMovie = (req, res) => {
     });
 }
 
-// const create = (req, res) => {
-//     const newMovie= new Movies(req.body);
-//     console.log(newMovie);
-//     newMovie.save((err) => {
-//         if(err) {
-//             console.log(err);
-//         }
-//         return res.redirect('/movies');
-//     })
-// };
-
-const review = (req, res) => {
+// get review & save
+const show = (req, res) => {
     Movies.findById(req.params.id, (err, movie) => {
-        console.log(movie);
+        // console.log(movie);
+        // const status = movie.status.push(req.body);
+        // console.log(status);
         if(err) {
         console.log(err);
         }
@@ -57,9 +39,29 @@ const review = (req, res) => {
     })
 }
 
+const review = (req, res) => {
+    console.log(req.body);
+    Movies.findById(req.params.id, (err, movie) => {
+        // console.log(movie);
+        movie.reviews.push(req.body);
+        // console.log(movie.reviews);
+        movie.save((err) => {
+            if(err) {
+                console.log(err);
+            }
+            res.render('watchlists/review',
+            {
+            title: 'Movie Review',
+            movie
+            })
+    
+        })
+    })
+}
+
 module.exports = {
     index,
     searchMovie,
-    // create,
+    show,
     review
 }

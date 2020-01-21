@@ -6,12 +6,21 @@ const Schema = mongoose.Schema;
 //     name: String
 // })
 
+const reviewSchema = new Schema ({
+    movieId: String,
+    rating: {type: Number, min: 0, max: 5},
+    content: String
+}, {
+    timestamps: true
+})
+
 const movieSchema = new Schema ({
     movieId: String,
     externalId: String,
     name: String,
     image: String,
-    trailer: String
+    trailer: String,
+    reviews: [reviewSchema]
     // category: categorySchema
 }, {
     timestamps: true

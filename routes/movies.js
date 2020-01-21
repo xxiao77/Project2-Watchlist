@@ -7,9 +7,10 @@ const moviesCtrl = require('../controllers/movies');
 
 router.get('/', moviesCtrl.index);
 router.get('/search', moviesCtrl.searchMovie);
-// router.post('/new', moviesCtrl.create);
-router.get('/:id/review', moviesCtrl.review);
+router.get('/:id', moviesCtrl.show);
+router.post('/:id/review', moviesCtrl.review)
 
+// get input from "search" form & search movie
 router.post('/search', async(req, res) => {
     // input name
     const query = req.body['newMovie'];
@@ -24,7 +25,13 @@ router.post('/search', async(req, res) => {
     })
 })
 
+// get input from "new" form & save movie
 router.post('/new', async(req, res) => {
+    // check if duplicate
+    for(let key in req.body) {
+        if(req.body[key] === "") delete req.body[key];
+    }
+
     const newMovie= new Movies(req.body);
     // console.log(newMovie.externalId);
     const trailer = await axios(
@@ -38,6 +45,7 @@ router.post('/new', async(req, res) => {
     });
     // console.log(trailerKey);
     newMovie.trailer = trailerKey;
+    
     newMovie.save((err) => {
         if(err) {
             console.log(err);
