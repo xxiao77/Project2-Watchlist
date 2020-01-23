@@ -1,29 +1,43 @@
 <%- include('../partials/header') %>
 
 <div class="reviews">
-    <h2><%= movie.name %></h2>
-    <img src="https://image.tmdb.org/t/p/w342<%= movie.image %>" class="">
-    <% movie.reviews.forEach(r => { %>
-        <div>
-            <td><%= r. content %></td>
-            <td><%= r. rating %></td>
-        </div>
-    <% }) %>
+    <div class="image">
+        <img src="https://image.tmdb.org/t/p/w342<%= movie.image %>" class="">
+    </div>
+
+    <div class="review_info">
+        <% movie.reviews.forEach(r => { %>
+            <table>
+                <th>Rate</th>
+                <th>Date</th>
+                <br>
+                <tbody id="review_td">
+                    <td><%= r. rating %></td>
+                    <td><%= r. date %></td>
+            </tbody>
+            </table>
+            <p><%= r. content %></p>
+            <form action="/movies/<%= movie._id %>/review/<%= r._id %>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete" class="trailer_remove" id="remove"></input>
+            </form>
+        <% }) %>
+        <br>
+        <form id="add-review-form" method="POST"
+            action="/movies/<%= movie._id %>/review">
+            <label>Review:</label>
+            <br>
+            <textarea name="content" rows="6" cols="70"></textarea>
+            <br>
+            <label>Rating:</label>
+            <select name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <input type="submit" value="Save" id="saveReviewButton"></input>
+        </form>
+    </div>
 </div>
-<br>
-<form id="add-review-form" method="POST"
-  action="/movies/<%= movie._id %>/review">
-  <label>Review:</label>
-  <textarea name="content"></textarea>
-  <label>Rating:</label>
-  <select name="rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <input type="submit" value="Save">
-</form>
-<br>
 

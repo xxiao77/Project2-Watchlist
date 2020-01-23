@@ -5,19 +5,22 @@
     <div class="watchList">
         <form action="/movies/new" method="POST" class="movie">
             <br><br>
-            <div class="name_trailer">
+            <div class="name_trailer">  
                 <a href="/movies/<%= m._id%>" class="name"><span class="bm">Review</span><span class="am"><%= m.name %></span></a>
                 <br>
-                <a href="https://www.youtube.com/watch?v=<%= m.trailer %>" target="_blank" class="trailer">Trailer</a>
+                <a href="https://www.youtube.com/watch?v=<%= m.trailer %>" target="_blank" class="trailer_remove">Trailer</a>
             </div>
         <% m.reviews.forEach(r => { %>
-            <p class="name_trailer" id="rating">Rate: <%= r.rating %></p>
-            <p id="content">
+            <p class="name_trailer">Rate: <%= r.rating %></p>
+            <p class="content">
             <br><%= r.content %>
             </p>
         <% }) %>
             <br>
             <img src="https://image.tmdb.org/t/p/w185<%= m.image %>">
+        </form>
+        <form action="/movies/<%= m._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Removes" id="remove" class="trailer_remove"></input>
         </form>
     </div>
 <% }) %>

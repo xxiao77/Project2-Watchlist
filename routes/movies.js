@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var axios = require('axios');
-const Movies = require('../models/movie');
+const Movie = require('../models/movie');
 
 const moviesCtrl = require('../controllers/movies');
 
 router.get('/', moviesCtrl.index);
 router.get('/search', moviesCtrl.searchMovie);
 router.get('/:id', moviesCtrl.show);
-router.post('/:id/review', moviesCtrl.review)
+router.delete('/:id', moviesCtrl.deleteMovie);
+router.post('/:id/review', moviesCtrl.review);
+router.delete('/:id/review/:reviewId', moviesCtrl.deleteReview);
 
 // get input from "search" form & search movie
 router.post('/search', async(req, res) => {
@@ -22,18 +24,23 @@ router.post('/search', async(req, res) => {
     res.render('watchlists/new', {
         title: 'SEARCH MOVIE',
         movies: movie.data.results,
+        user: req.user
     })
 })
 
 // get input from "new" form & save movie
 router.post('/new', async(req, res) => {
     // check if duplicate
-    for(let key in req.body) {
-        if(req.body[key] === "") delete req.body[key];
-    }
+    // Movie.find() <- This is Query
+    // Query.exec() <- promise
 
-    const newMovie= new Movies(req.body);
-    // console.log(newMovie.externalId);
+    const movie = await Movie.find({externalId: req.body['externalId']}).exec();
+    // console.log(movie);
+    if(movie.length > 0) {
+        return res.redirect('/movies');
+    }
+    const newMovie = new Movie(req.body);
+    console.log(newMovie);
     const trailer = await axios(
         `https://api.themoviedb.org/3/movie/${newMovie.externalId}/videos?api_key=${process.env.TMDB_API_KEY}`
     );

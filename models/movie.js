@@ -9,7 +9,11 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema ({
     movieId: String,
     rating: {type: Number, min: 0, max: 5},
-    content: String
+    content: String,
+    date: {
+        type: Date,
+        default: new Date()
+    }
 }, {
     timestamps: true
 })

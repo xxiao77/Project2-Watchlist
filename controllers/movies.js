@@ -1,15 +1,16 @@
-const Movies = require('../models/movie');
+const Movie = require('../models/movie');
 // const Users = require('../models/user');
 
 // show watchlist movies
 const index = (req, res) => {
-    Movies.find({}, (err, movies) => {
+    Movie.find({}, (err, movies) => {
         if(err) {
             console.log(err);
         }
         res.render('watchlists/movie', {
             title: 'MOVIE LIST',
-            movies
+            movies,
+            user: req.user
         });
     });
 }
@@ -19,12 +20,13 @@ const searchMovie = (req, res) => {
     res.render('watchlists/new', {
         title: 'SEARCH MOVIE',
         movies: [],
+        user: req.user
     });
 }
 
 // get review & save
 const show = (req, res) => {
-    Movies.findById(req.params.id, (err, movie) => {
+    Movie.findById(req.params.id, (err, movie) => {
         // console.log(movie);
         // const status = movie.status.push(req.body);
         // console.log(status);
@@ -34,28 +36,52 @@ const show = (req, res) => {
     res.render('watchlists/review',
         {
             title: 'Movie Review',
-            movie
+            movie,
+            user: req.user
         })
     })
 }
 
 const review = (req, res) => {
     console.log(req.body);
-    Movies.findById(req.params.id, (err, movie) => {
+    Movie.findById(req.params.id, (err, movie) => {
         // console.log(movie);
         movie.reviews.push(req.body);
         // console.log(movie.reviews);
         movie.save((err) => {
             if(err) {
                 console.log(err);
-            }
-            res.render('watchlists/review',
-            {
-            title: 'Movie Review',
-            movie
+            } res.render('watchlists/review',
+                {
+                title: 'Movie Review',
+                movie,
+                user: req.user
             })
     
         })
+    })
+}
+
+const deleteReview = (req, res) => {
+    Movie.findById(req.params.id, async (err, movie) => {
+        if(err) {
+            console.log(err);
+        }
+        // console.log(movie, req.params.reviewId)
+
+        movie.reviews = movie.reviews.filter(r => r._id.toString() !== req.params.reviewId)
+
+        await movie.save()
+        console.log(movie.reviews);
+        return res.redirect(`/movies/${movie._id}`)
+    })
+}
+
+const deleteMovie = (req, res) => {
+    Movie.findByIdAndDelete(req.params.id, (err) => {
+        if(err) {
+            console.log(err);
+        } res.redirect('/movies');
     })
 }
 
@@ -63,5 +89,7 @@ module.exports = {
     index,
     searchMovie,
     show,
-    review
+    review,
+    deleteMovie,
+    deleteReview
 }
