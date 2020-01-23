@@ -7,28 +7,30 @@
 
     <div class="review_info">
         <% movie.reviews.forEach(r => { %>
+        <div class="review_rating">  
             <table>
-                <th>Rate</th>
-                <th>Date</th>
+                <th class="review_rating_label">Rate</th>
+                <th class="review_rating_label">Date</th>
                 <br>
                 <tbody id="review_td">
                     <td><%= r. rating %></td>
                     <td><%= r. date %></td>
             </tbody>
             </table>
-            <p><%= r. content %></p>
+            <p class="content"><%= r. content %></p>
             <form action="/movies/<%= movie._id %>/review/<%= r._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" class="trailer_remove" id="remove"></input>
             </form>
+        </div>
         <% }) %>
         <br>
         <form id="add-review-form" method="POST"
             action="/movies/<%= movie._id %>/review">
-            <label>Review:</label>
+            <label class="review_rating_label">Review :</label>
             <br>
             <textarea name="content" rows="6" cols="70"></textarea>
             <br>
-            <label>Rating:</label>
+            <label class="review_rating_label">Rating :</label>
             <select name="rating">
                 <option value="1">1</option>
                 <option value="2">2</option>

@@ -142,12 +142,12 @@ padding-top: 50px;
 .container {
   display: grid;
   grid-template-columns: 1fr 50%;
-  background-color: rgba(197, 185, 185, 0.301);
+  background-color: rgba(219, 212, 212, 0.726);
 }
 
 .watchList {
   margin: 30px;
-  background-color: rgba(212, 208, 208, 0.473);
+  background-color: rgba(235, 230, 230, 0.575);
 }
 
 .name_trailer {
@@ -246,4 +246,20 @@ a:hover span.am, a span.bm {display: none; }
   background-color: #7ea1b9;
   color: rgb(255, 255, 255);
   font-weight: 800;
+}
+
+textarea {
+  font-size: 15px;
+  padding: 8px;
+}
+
+.review_rating_label {
+  font-family: 'Dancing Script', cursive;
+  border-bottom: 1px solid #456;
+  font-style: italic;
+  font-size: x-large;
+}
+
+.review_rating {
+  display: inline-block;
 }
