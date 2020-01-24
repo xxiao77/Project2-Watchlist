@@ -27,9 +27,7 @@ body {
   font-size: x-large;
 }
 
-/* Links - change color on hover */
 .topnav a:hover {
-  /* background-color: rgb(221, 221, 221); */
   color: #fcfaf9;
 }
 
@@ -88,8 +86,6 @@ padding-top: 50px;
   float: left;
   padding: 7px;
   border: none;
-  /* margin-top: 8px; */
-  /* margin-right: 16px; */
   font-size: 17px;
 }
 
@@ -151,7 +147,6 @@ padding-top: 50px;
 }
 
 .name_trailer {
-  /* display:inline-block; */
   font-family: 'Archivo Black', cursive;
   font-size: medium;
   font-weight: 500;
@@ -160,8 +155,6 @@ padding-top: 50px;
 .content {
   font-family: 'Caveat', cursive;
   font-size: x-large;
-  float: right;
-  /* padding-left: 50px; */
   margin-top: 0px;
   font-weight: 800;
 }
@@ -179,8 +172,6 @@ padding-top: 50px;
 
 a span.am, a:hover span.bm {display: block; }
 a:hover span.am, a span.bm {display: none; }
-
-/* a:hover {visibility:visible} */
 
 .name:hover{
   content: 'Add Review';
@@ -206,9 +197,9 @@ a:hover span.am, a span.bm {display: none; }
 #remove {
   font-family: 'Archivo Black', cursive;
   font-size: medium;
-  font-weight: 500;
   float: right;
-  margin: 20px;
+  font-weight: 500;
+  /* margin: 20px; */
 }
 
 .reviews {

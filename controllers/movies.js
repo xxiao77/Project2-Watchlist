@@ -27,9 +27,6 @@ const searchMovie = (req, res) => {
 // get review & save
 const show = (req, res) => {
     Movie.findById(req.params.id, (err, movie) => {
-        // console.log(movie);
-        // const status = movie.status.push(req.body);
-        // console.log(status);
         if(err) {
         console.log(err);
         }
@@ -43,11 +40,8 @@ const show = (req, res) => {
 }
 
 const review = (req, res) => {
-    console.log(req.body);
     Movie.findById(req.params.id, (err, movie) => {
-        // console.log(movie);
         movie.reviews.push(req.body);
-        // console.log(movie.reviews);
         movie.save((err) => {
             if(err) {
                 console.log(err);
@@ -62,17 +56,26 @@ const review = (req, res) => {
     })
 }
 
-const deleteReview = (req, res) => {
+const editReview = (req, res) => {
     Movie.findById(req.params.id, async (err, movie) => {
         if(err) {
             console.log(err);
         }
-        // console.log(movie, req.params.reviewId)
+        var review = movie.reviews.filter(r => r.id === req.params.reviewId);
+        review[0].content = req.body['edit']
+        await movie.save();
+        return res.redirect(`/movies/${movie._id}`)
+    })
+}
 
+const deleteReview = (req, res) => {
+    console.log(req.body);
+    Movie.findById(req.params.id, async (err, movie) => {
+        if(err) {
+            console.log(err);
+        } 
         movie.reviews = movie.reviews.filter(r => r._id.toString() !== req.params.reviewId)
-
-        await movie.save()
-        console.log(movie.reviews);
+        await movie.save();
         return res.redirect(`/movies/${movie._id}`)
     })
 }
@@ -91,5 +94,6 @@ module.exports = {
     show,
     review,
     deleteMovie,
-    deleteReview
+    deleteReview,
+    editReview
 }

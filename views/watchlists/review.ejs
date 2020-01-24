@@ -2,7 +2,7 @@
 
 <div class="reviews">
     <div class="image">
-        <img src="https://image.tmdb.org/t/p/w342<%= movie.image %>" class="">
+        <img src="https://image.tmdb.org/t/p/w342<%= movie.image %>">
     </div>
 
     <div class="review_info">
@@ -18,8 +18,13 @@
             </tbody>
             </table>
             <p class="content"><%= r. content %></p>
-            <form action="/movies/<%= movie._id %>/review/<%= r._id %>?_method=DELETE" method="POST">
+            <form action="/movies/<%= movie._id %>/review/<%= r._id %>/?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" class="trailer_remove" id="remove"></input>
+            </form>
+            <br>
+            <form action="/movies/<%= movie._id %>/review/<%= r._id %>?_method=PUT" method="POST">
+                <input  type="text" class="content" name="edit" placeholder="review update..."></input>
+                <input type="submit" value="Edit" class="trailer_remove" id="remove"></input>
             </form>
         </div>
         <% }) %>
