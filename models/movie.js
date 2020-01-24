@@ -17,8 +17,8 @@ const reviewSchema = new Schema ({
 }, {
     timestamps: true
 })
-
 const movieSchema = new Schema ({
+    userId: String,
     movieId: String,
     externalId: String,
     name: String,
@@ -31,4 +31,3 @@ const movieSchema = new Schema ({
 })
 
 module.exports = mongoose.model('Movie', movieSchema);
-

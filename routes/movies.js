@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 const Movie = require('../models/movie');
+const User = require('../models/user');
 
 const moviesCtrl = require('../controllers/movies');
 
@@ -13,7 +14,6 @@ router.post('/:id/review', moviesCtrl.review);
 router.delete('/:id/review/:reviewId', moviesCtrl.deleteReview);
 router.put('/:id/review/:reviewId', moviesCtrl.editReview);
 
-// get input from "search" form & search movie
 router.post('/search', async(req, res) => {
 
     // get input movie name
@@ -33,7 +33,7 @@ router.post('/search', async(req, res) => {
 router.post('/new', async(req, res) => {
 
     // check if duplicate
-    const movie = await Movie.find({externalId: req.body['externalId']}).exec();
+    const movie = await Movie.find({userId: req.user._id, externalId: req.body['externalId']}).exec();
     if(movie.length > 0) {
         return res.redirect('/movies');
     }
@@ -47,6 +47,7 @@ router.post('/new', async(req, res) => {
     trailers.forEach(t => {
         trailerKey = t.key;
     });
+    newMovie.userId = req.user._id;
     newMovie.trailer = trailerKey;
     
     newMovie.save((err) => {

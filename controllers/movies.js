@@ -1,9 +1,9 @@
 const Movie = require('../models/movie');
-// const Users = require('../models/user');
+const User = require('../models/user');
 
-// show watchlist movies
+// show watchlist movies.
 const index = (req, res) => {
-    Movie.find({}, (err, movies) => {
+    Movie.find({userId: req.user._id}, (err, movies) => {
         if(err) {
             console.log(err);
         }
